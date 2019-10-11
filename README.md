@@ -9,10 +9,9 @@ Requirements:
 
 ## Clone and work on branch
 
-One posibility is to clone the repo and work on a branch. 
+One posibility is to clone the repo and work on a branch. Creating a branch can be done with the following command.
 
 ```bash
-git clone <url>
 git checkout -b <name of branch>
 ```
 
