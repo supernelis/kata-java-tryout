@@ -3,6 +3,7 @@
 This repository is there to allow you starting a new code kata fast.
 
 Requirements:
+
 * Java (minimally 1.8)
 * Maven
 
@@ -14,6 +15,7 @@ One posibility is to clone the repo and work on a branch.
 git clone <url>
 git checkout -b <name of branch>
 ```
+
 I would suggest to name the branch something like ```2019_10_11_numberToWordKata```
 
 ## Download as zip
@@ -25,4 +27,3 @@ Don't forget to init the git repository:
 ```bash
 git init
 ```
-
