@@ -3,6 +3,7 @@ package be.codekata;
 import org.junit.Test;
 
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 public class RegisterUseCaseTest {
@@ -25,5 +26,14 @@ public class RegisterUseCaseTest {
 
         FetchAccountReponse expected = new FetchAccountReponse(accountId, "2023-02-28");
         assertThat(fetchAccountReponse, equalTo(expected));
+    }
+
+    @Test
+    public void something() {
+        AccountRepository accountRepository = new InMemoryAccountRepository();
+        AccountService service = new AccountService();
+        String accountId = service.registerAccount("a customer id");
+
+        assertNotNull(accountRepository.find(new AccountId(accountId)));
     }
 }
