@@ -12,7 +12,7 @@ public class AccountService {
 
         this.customerId = customerId;
         String currentAccountId = this.accountId;
-        this.accountId = randomAccountIDGenerator.generateAccountID();
+        this.accountId = randomAccountIDGenerator.generate();
         return currentAccountId;
     }
 

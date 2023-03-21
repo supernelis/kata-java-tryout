@@ -3,10 +3,8 @@ package be.codekata;
 import java.util.UUID;
 
 public class RandomAccountIDGenerator {
-    public RandomAccountIDGenerator() {
-    }
 
-    public String generateAccountID() {
+    public String generate() {
         return UUID.randomUUID().toString();
     }
 }
