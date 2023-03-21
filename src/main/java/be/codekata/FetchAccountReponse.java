@@ -23,4 +23,12 @@ public class FetchAccountReponse {
     public int hashCode() {
         return Objects.hash(accountId, openingDate);
     }
+
+    @Override
+    public String toString() {
+        return "FetchAccountReponse{" +
+                "accountId='" + accountId + '\'' +
+                ", openingDate='" + openingDate + '\'' +
+                '}';
+    }
 }

@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class RegisterUseCaseTest {
@@ -48,5 +47,15 @@ public class RegisterUseCaseTest {
 
         assertThrows(CustomerAlreadyRegisteredException.class,
                 () ->  service.registerAccount("a customer id"));
+    }
+
+    @Test
+    void registerTwoAccountsShouldHaveUniqueIds() {
+        AccountService service = new AccountService();
+
+        String firstCustomerAccountId = service.registerAccount("a customer id");
+        String secondCustomerAccountId = service.registerAccount("another id");
+
+        assertNotEquals(firstCustomerAccountId, secondCustomerAccountId);
     }
 }
