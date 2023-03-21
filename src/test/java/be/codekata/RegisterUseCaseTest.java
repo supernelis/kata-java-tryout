@@ -21,6 +21,7 @@ public class RegisterUseCaseTest {
 
     @Test
     public void receiveNewIdWhenRegisteringAccount(){
+        service = new AccountService(() -> "an id");
         String response = service.registerAccount("a customer id");
 
         assertThat(response, equalTo("an id"));
