@@ -108,6 +108,9 @@ void name(List<Color> color) {
 ```
 
 
+https://github.com/ivanpaulovich/ddd-tdd-rich-domain-model-dojo-kata
+
+
 
 
 
