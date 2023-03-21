@@ -29,7 +29,7 @@ public class RegisterUseCaseTest {
     }
 
     @Test
-    public void something() {
+    public void registeredAccountIsPersisted() {
         AccountRepository accountRepository = new InMemoryAccountRepository();
         AccountService service = new AccountService();
         String accountId = service.registerAccount("a customer id");
