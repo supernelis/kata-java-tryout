@@ -2,6 +2,7 @@ package be.codekata;
 
 
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -11,10 +12,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class RegisterUseCaseTest {
 
+    private AccountService service;
+
+    @BeforeEach
+    void setUp() {
+        service = new AccountService();
+    }
+
     @Test
     public void receiveNewIdWhenRegisteringAccount(){
-        AccountService service = new AccountService();
-
         String response = service.registerAccount("a customer id");
 
         assertThat(response, equalTo("an id"));
@@ -22,7 +28,6 @@ public class RegisterUseCaseTest {
 
     @Test
     public void registeredAccountCanBeFetched(){
-        AccountService service = new AccountService();
         String accountId = service.registerAccount("a customer id");
 
         FetchAccountReponse fetchAccountReponse = service.fetchAccount(accountId);
@@ -34,7 +39,6 @@ public class RegisterUseCaseTest {
     @Test
     public void registeredAccountIsPersisted() {
         AccountRepository accountRepository = new InMemoryAccountRepository();
-        AccountService service = new AccountService();
         String accountId = service.registerAccount("a customer id");
 
         assertNotNull(accountRepository.find(new AccountId(accountId)));
@@ -42,7 +46,6 @@ public class RegisterUseCaseTest {
 
     @Test
     public void registeringTwoAccountsWithTheSameIdIsForbidden() {
-        AccountService service = new AccountService();
         service.registerAccount("a customer id");
 
         assertThrows(CustomerAlreadyRegisteredException.class,
@@ -51,8 +54,6 @@ public class RegisterUseCaseTest {
 
     @Test
     void registerTwoAccountsShouldHaveUniqueIds() {
-        AccountService service = new AccountService();
-
         String firstCustomerAccountId = service.registerAccount("a customer id");
         String secondCustomerAccountId = service.registerAccount("another id");
 
