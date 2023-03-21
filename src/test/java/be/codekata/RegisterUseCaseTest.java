@@ -1,10 +1,14 @@
 package be.codekata;
 
-import org.junit.Test;
 
+
+import org.junit.jupiter.api.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class RegisterUseCaseTest {
 
@@ -35,5 +39,14 @@ public class RegisterUseCaseTest {
         String accountId = service.registerAccount("a customer id");
 
         assertNotNull(accountRepository.find(new AccountId(accountId)));
+    }
+
+    @Test
+    public void registeringTwoAccountsWithTheSameIdIsForbidden() {
+        AccountService service = new AccountService();
+        service.registerAccount("a customer id");
+
+        assertThrows(CustomerAlreadyRegisteredException.class,
+                () ->  service.registerAccount("a customer id"));
     }
 }
