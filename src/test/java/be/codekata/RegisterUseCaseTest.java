@@ -16,7 +16,7 @@ public class RegisterUseCaseTest {
 
     @BeforeEach
     void setUp() {
-        service = new AccountService();
+        service = new AccountService(new RandomAccountIDGenerator());
     }
 
     @Test
