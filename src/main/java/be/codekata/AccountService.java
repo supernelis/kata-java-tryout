@@ -1,8 +1,7 @@
 package be.codekata;
 
-import java.util.UUID;
-
 public class AccountService {
+    private final RandomAccountIDGenerator randomAccountIDGenerator = new RandomAccountIDGenerator();
     private String customerId;
     private String accountId = "an id";
 
@@ -13,7 +12,7 @@ public class AccountService {
 
         this.customerId = customerId;
         String currentAccountId = this.accountId;
-        this.accountId = UUID.randomUUID().toString();
+        this.accountId = randomAccountIDGenerator.generateAccountID();
         return currentAccountId;
     }
 
