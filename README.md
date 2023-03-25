@@ -7,6 +7,11 @@ Requirements:
 * Java (minimally 1.8)
 * Maven
 
+## Links to resources used in the kata
+
+* Kata description: [.NET Standard project with DDD patterns covered with Unit Tests](https://github.com/ivanpaulovich/ddd-tdd-rich-domain-model-dojo-kata)
+* [Our retro board](https://hackmd.io/5KMMJL0JQtO2IY_qlh6Stg)
+
 ## Clone and work on branch
 
 One posibility is to clone the repo and work on a branch. Creating a branch can be done with the following command.
