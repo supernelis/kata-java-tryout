@@ -2,7 +2,6 @@ package be.codekata;
 
 public class AccountService {
     private final AccountIDGenerator accountIDGenerator;
-    private String customerId;
     private Account account;
 
     public AccountService(AccountIDGenerator accountIDGenerator) {
@@ -15,9 +14,7 @@ public class AccountService {
         }
 
         final AccountId accountId = accountIDGenerator.generate();
-        final Account account = new Account(accountId, customerId);
-        this.customerId = customerId;
-        this.account = account;
+        this.account = new Account(accountId, customerId);
         return accountId.id();
     }
 
