@@ -13,8 +13,10 @@ public class AccountService {
             throw new CustomerAlreadyRegisteredException();
         }
 
+        final AccountId accountId = accountIDGenerator.generate();
+        final Account account = new Account(accountId, customerId);
         this.customerId = customerId;
-        return accountIDGenerator.generate().id();
+        return accountId.id();
     }
 
     public FetchAccountReponse fetchAccount(String accountId) {
