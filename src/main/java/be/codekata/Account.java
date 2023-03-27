@@ -13,4 +13,8 @@ public class Account {
     public String customerId() {
         return customerId;
     }
+
+    public String accountId() {
+        return accountId.id();
+    }
 }

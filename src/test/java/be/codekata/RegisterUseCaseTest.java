@@ -14,13 +14,13 @@ public class RegisterUseCaseTest {
 
     @BeforeEach
     void setUp() {
-        service = new AccountService(new RandomAccountIDGenerator());
         accountRepository = new InMemoryAccountRepository();
+        service = new AccountService(accountRepository,new RandomAccountIDGenerator());
     }
 
     @Test
     public void receiveNewIdWhenRegisteringAccount(){
-        service = new AccountService(() -> new AccountId("an id"));
+        service = new AccountService(accountRepository, () -> new AccountId("an id"));
         String response = service.registerAccount("a customer id");
 
         assertThat(response, equalTo("an id"));
@@ -40,7 +40,9 @@ public class RegisterUseCaseTest {
     public void registeredAccountIsPersisted() {
         String accountId = service.registerAccount("a customer id");
 
-        assertNotNull(accountRepository.find(new AccountId(accountId)));
+        Account actualAccount = accountRepository.find(new AccountId(accountId));
+        assertEquals(accountId,actualAccount.accountId());
+        assertEquals("a customer id",actualAccount.customerId());
     }
 
     @Test
