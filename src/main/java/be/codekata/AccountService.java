@@ -5,7 +5,6 @@ import be.codekata.core.*;
 public class AccountService {
     private final AccountRepository accountRepository;
     private final AccountIDGenerator accountIDGenerator;
-    private Account account;
 
     public AccountService(AccountRepository accountRepository, AccountIDGenerator accountIDGenerator) {
         this.accountRepository = accountRepository;
@@ -13,13 +12,12 @@ public class AccountService {
     }
 
     public String registerAccount(String customerId) {
-        if ( account != null && customerId.equals(account.customerId())) {
+        if (accountRepository.findByCustomerId(customerId).isPresent()) {
             throw new CustomerAlreadyRegisteredException();
         }
 
         final AccountId accountId = accountIDGenerator.generate();
-        this.account = new Account(accountId, customerId);
-        accountRepository.store(account);
+        accountRepository.store(new Account(accountId, customerId));
         return accountId.id();
     }
 
