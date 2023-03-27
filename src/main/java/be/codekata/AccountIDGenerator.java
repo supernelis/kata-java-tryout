@@ -1,3 +1,5 @@
-package be.codekata;public interface AccountIDGenerator {
-    String generate();
+package be.codekata;
+
+public interface AccountIDGenerator {
+    AccountId generate();
 }

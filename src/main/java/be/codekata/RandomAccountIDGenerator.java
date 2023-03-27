@@ -5,7 +5,7 @@ import java.util.UUID;
 public class RandomAccountIDGenerator implements AccountIDGenerator {
 
     @Override
-    public String generate() {
-        return UUID.randomUUID().toString();
+    public AccountId generate() {
+        return new AccountId(UUID.randomUUID().toString());
     }
 }

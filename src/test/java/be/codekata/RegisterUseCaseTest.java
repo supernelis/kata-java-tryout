@@ -1,7 +1,4 @@
 package be.codekata;
-
-
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +18,7 @@ public class RegisterUseCaseTest {
 
     @Test
     public void receiveNewIdWhenRegisteringAccount(){
-        service = new AccountService(() -> "an id");
+        service = new AccountService(() -> new AccountId("an id"));
         String response = service.registerAccount("a customer id");
 
         assertThat(response, equalTo("an id"));

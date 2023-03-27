@@ -14,7 +14,7 @@ public class AccountService {
         }
 
         this.customerId = customerId;
-        return accountIDGenerator.generate();
+        return accountIDGenerator.generate().id();
     }
 
     public FetchAccountReponse fetchAccount(String accountId) {

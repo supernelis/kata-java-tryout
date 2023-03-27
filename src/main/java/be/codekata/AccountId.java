@@ -22,4 +22,9 @@ public class AccountId {
     public int hashCode() {
         return Objects.hash(accountId);
     }
+
+
+    public String id() {
+        return accountId;
+    }
 }
