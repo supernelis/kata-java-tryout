@@ -10,10 +10,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RegisterUseCaseTest {
 
     private AccountService service;
+    private AccountRepository accountRepository;
 
     @BeforeEach
     void setUp() {
         service = new AccountService(new RandomAccountIDGenerator());
+        accountRepository = new InMemoryAccountRepository();
     }
 
     @Test
@@ -36,7 +38,6 @@ public class RegisterUseCaseTest {
 
     @Test
     public void registeredAccountIsPersisted() {
-        AccountRepository accountRepository = new InMemoryAccountRepository();
         String accountId = service.registerAccount("a customer id");
 
         assertNotNull(accountRepository.find(new AccountId(accountId)));
