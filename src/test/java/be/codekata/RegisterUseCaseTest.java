@@ -45,7 +45,7 @@ public class RegisterUseCaseTest {
     public void registeredAccountIsPersisted() {
         String accountId = service.registerAccount("a customer id");
 
-        Account actualAccount = accountRepository.find(new AccountId(accountId));
+        Account actualAccount = accountRepository.find(new AccountId(accountId)).get();
         assertEquals(accountId,actualAccount.accountId());
         assertEquals("a customer id",actualAccount.customerId());
     }

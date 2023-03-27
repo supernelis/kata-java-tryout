@@ -10,8 +10,8 @@ public class InMemoryAccountRepository implements AccountRepository {
     private Account account;
 
     @Override
-    public Account find(AccountId id) {
-        return account;
+    public Optional<Account> find(AccountId id) {
+        return Optional.ofNullable(account);
     }
 
     @Override
