@@ -1,5 +1,7 @@
 package be.codekata;
 
+import be.codekata.core.*;
+
 public class AccountService {
     private final AccountRepository accountRepository;
     private final AccountIDGenerator accountIDGenerator;

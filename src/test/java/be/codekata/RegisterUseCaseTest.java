@@ -1,4 +1,9 @@
 package be.codekata;
+import be.codekata.core.Account;
+import be.codekata.core.AccountId;
+import be.codekata.core.CustomerAlreadyRegisteredException;
+import be.codekata.infrastructure.InMemoryAccountRepository;
+import be.codekata.infrastructure.RandomAccountIDGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,8 @@
-package be.codekata;
+package be.codekata.infrastructure;
+
+import be.codekata.core.Account;
+import be.codekata.core.AccountId;
+import be.codekata.core.AccountRepository;
 
 public class InMemoryAccountRepository implements AccountRepository {
     private Account account;

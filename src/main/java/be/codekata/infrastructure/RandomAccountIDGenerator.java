@@ -1,4 +1,7 @@
-package be.codekata;
+package be.codekata.infrastructure;
+
+import be.codekata.core.AccountIDGenerator;
+import be.codekata.core.AccountId;
 
 import java.util.UUID;
 

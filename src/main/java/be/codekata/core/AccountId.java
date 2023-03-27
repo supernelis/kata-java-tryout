@@ -1,4 +1,4 @@
-package be.codekata;
+package be.codekata.core;
 
 import java.util.Objects;
 

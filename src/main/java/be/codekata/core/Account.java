@@ -1,4 +1,4 @@
-package be.codekata;
+package be.codekata.core;
 
 public class Account {
     private final AccountId accountId;
