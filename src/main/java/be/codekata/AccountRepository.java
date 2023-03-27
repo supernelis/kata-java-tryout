@@ -1,13 +1,7 @@
 package be.codekata;
 
-public class AccountRepository {
-    private Account account;
+public interface AccountRepository {
+    Account find(AccountId id);
 
-    public Account find(AccountId id) {
-        return account;
-    }
-
-    public void store(Account account) {
-        this.account = account;
-    }
+    void store(Account account);
 }

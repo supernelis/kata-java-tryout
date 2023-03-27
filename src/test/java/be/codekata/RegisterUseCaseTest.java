@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RegisterUseCaseTest {
 
     private AccountService service;
-    private AccountRepository accountRepository;
+    private InMemoryAccountRepository accountRepository;
 
     @BeforeEach
     void setUp() {
