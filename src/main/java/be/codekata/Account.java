@@ -9,4 +9,8 @@ public class Account {
         this.accountId = accountId;
         this.customerId = customerId;
     }
+
+    public String customerId() {
+        return customerId;
+    }
 }
