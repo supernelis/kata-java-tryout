@@ -9,10 +9,12 @@ import static java.time.LocalDate.now;
 public class AccountService {
     private final AccountRepository accountRepository;
     private final AccountIDGenerator accountIDGenerator;
+    private final DateGenerator dateGenerator;
 
-    public AccountService(AccountRepository accountRepository, AccountIDGenerator accountIDGenerator) {
+    public AccountService(AccountRepository accountRepository, AccountIDGenerator accountIDGenerator, DateGenerator dateGenerator) {
         this.accountRepository = accountRepository;
         this.accountIDGenerator = accountIDGenerator;
+        this.dateGenerator = dateGenerator;
     }
 
     public String registerAccount(String customerId) {
@@ -21,7 +23,7 @@ public class AccountService {
         }
 
         final AccountId accountId = accountIDGenerator.generate();
-        OpeningDate openingDate = new OpeningDate(LocalDate.parse("2023-04-01"));
+        OpeningDate openingDate = new OpeningDate(dateGenerator.now());
         accountRepository.store(new Account(accountId, customerId, openingDate));
         return accountId.id();
     }

@@ -7,6 +7,8 @@ import be.codekata.infrastructure.RandomAccountIDGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,16 +18,18 @@ public class RegisterUseCaseTest {
 
     private AccountService service;
     private InMemoryAccountRepository accountRepository;
+    private TestDateGenerator dateGenerator;
 
     @BeforeEach
     void setUp() {
         accountRepository = new InMemoryAccountRepository();
-        service = new AccountService(accountRepository,new RandomAccountIDGenerator());
+        dateGenerator = new TestDateGenerator();
+        service = new AccountService(accountRepository,new RandomAccountIDGenerator(), dateGenerator);
     }
 
     @Test
     public void receiveNewIdWhenRegisteringAccount(){
-        service = new AccountService(accountRepository, () -> new AccountId("an id"));
+        service = new AccountService(accountRepository, () -> new AccountId("an id"), dateGenerator);
         String response = service.registerAccount("a customer id");
 
         assertThat(response, equalTo("an id"));
@@ -52,6 +56,18 @@ public class RegisterUseCaseTest {
     }
 
     @Test
+    public void cxxx() {
+        dateGenerator.setNow("2023-04-14");
+
+        String accountId = service.registerAccount("a customer id");
+
+        Account actualAccount = accountRepository.find(new AccountId(accountId)).get();
+        assertEquals(accountId,actualAccount.accountId());
+        assertEquals("a customer id",actualAccount.customerId());
+        assertEquals("2023-04-14",actualAccount.openingDate().toString());
+    }
+
+    @Test
     public void registeringTwoAccountsWithTheSameIdIsForbidden() {
         service.registerAccount("a customer id");
 
@@ -65,5 +81,18 @@ public class RegisterUseCaseTest {
         String secondCustomerAccountId = service.registerAccount("another id");
 
         assertNotEquals(firstCustomerAccountId, secondCustomerAccountId);
+    }
+
+    private class TestDateGenerator extends DateGenerator {
+        private String date = "2023-04-01";
+
+        public void setNow(String date) {
+            this.date = date;
+        }
+
+        @Override
+        public LocalDate now() {
+            return LocalDate.parse(date);
+        }
     }
 }
