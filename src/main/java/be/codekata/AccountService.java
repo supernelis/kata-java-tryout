@@ -2,6 +2,8 @@ package be.codekata;
 
 import be.codekata.core.*;
 
+import static java.time.LocalDate.now;
+
 public class AccountService {
     private final AccountRepository accountRepository;
     private final AccountIDGenerator accountIDGenerator;
@@ -17,7 +19,8 @@ public class AccountService {
         }
 
         final AccountId accountId = accountIDGenerator.generate();
-        accountRepository.store(new Account(accountId, customerId));
+        OpeningDate openingDate = new OpeningDate("2023-04-01");
+        accountRepository.store(new Account(accountId, customerId, openingDate));
         return accountId.id();
     }
 

@@ -48,7 +48,7 @@ public class RegisterUseCaseTest {
         Account actualAccount = accountRepository.find(new AccountId(accountId)).get();
         assertEquals(accountId,actualAccount.accountId());
         assertEquals("a customer id",actualAccount.customerId());
-        assertEquals("2023-04-01",actualAccount.openingDate().date());
+        assertEquals("2023-04-01",actualAccount.openingDate().toString());
     }
 
     @Test
