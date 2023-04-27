@@ -4,13 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class OpeningDate {
-    private final String now;
+    private final LocalDate date;
 
-    public OpeningDate(String now) {
-        this.now = now;
+    public OpeningDate(LocalDate date) {
+        this.date = date;
     }
 
     public String toString(){
-        return LocalDate.parse(now).format(DateTimeFormatter.ISO_DATE);
+        return date.format(DateTimeFormatter.ISO_DATE);
     }
 }
