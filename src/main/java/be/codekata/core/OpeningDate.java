@@ -10,7 +10,7 @@ public class OpeningDate {
         this.date = date;
     }
 
-    public String toString(){
+    public String asString(){
         return date.format(DateTimeFormatter.ISO_DATE);
     }
 }

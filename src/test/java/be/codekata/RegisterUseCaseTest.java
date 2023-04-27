@@ -55,7 +55,7 @@ public class RegisterUseCaseTest {
         Account persistedAccount = accountRepository.find(new AccountId(registeredAccountId)).get();
         assertEquals(registeredAccountId, persistedAccount.accountId());
         assertEquals("a customer id", persistedAccount.customerId());
-        assertEquals("2023-04-14", persistedAccount.openingDate().toString());
+        assertEquals("2023-04-14", persistedAccount.openingDate().asString());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class RegisterUseCaseTest {
         assertNotEquals(firstCustomerAccountId, secondCustomerAccountId);
     }
 
-    private class TestDateGenerator extends DateGenerator {
+    private static class TestDateGenerator extends DateGenerator {
         private String date = "2023-04-01";
 
         public void setNow(String date) {
