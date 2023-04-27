@@ -1,4 +1,5 @@
 package be.codekata;
+
 import be.codekata.core.Account;
 import be.codekata.core.AccountId;
 import be.codekata.core.CustomerAlreadyRegisteredException;
@@ -24,11 +25,11 @@ public class RegisterUseCaseTest {
     void setUp() {
         accountRepository = new InMemoryAccountRepository();
         dateGenerator = new TestDateGenerator();
-        service = new AccountService(accountRepository,new RandomAccountIDGenerator(), dateGenerator);
+        service = new AccountService(accountRepository, new RandomAccountIDGenerator(), dateGenerator);
     }
 
     @Test
-    public void receiveNewIdWhenRegisteringAccount(){
+    public void receiveNewIdWhenRegisteringAccount() {
         service = new AccountService(accountRepository, () -> new AccountId("an id"), dateGenerator);
         String response = service.registerAccount("a customer id");
 
@@ -36,7 +37,7 @@ public class RegisterUseCaseTest {
     }
 
     @Test
-    public void registeredAccountCanBeFetched(){
+    public void registeredAccountCanBeFetched() {
         String accountId = service.registerAccount("a customer id");
 
         FetchAccountReponse fetchAccountReponse = service.fetchAccount(accountId);
@@ -47,24 +48,14 @@ public class RegisterUseCaseTest {
 
     @Test
     public void registeredAccountIsPersisted() {
-        String accountId = service.registerAccount("a customer id");
-
-        Account actualAccount = accountRepository.find(new AccountId(accountId)).get();
-        assertEquals(accountId,actualAccount.accountId());
-        assertEquals("a customer id",actualAccount.customerId());
-        assertEquals("2023-04-01",actualAccount.openingDate().toString());
-    }
-
-    @Test
-    public void cxxx() {
         dateGenerator.setNow("2023-04-14");
 
-        String accountId = service.registerAccount("a customer id");
+        String registeredAccountId = service.registerAccount("a customer id");
 
-        Account actualAccount = accountRepository.find(new AccountId(accountId)).get();
-        assertEquals(accountId,actualAccount.accountId());
-        assertEquals("a customer id",actualAccount.customerId());
-        assertEquals("2023-04-14",actualAccount.openingDate().toString());
+        Account persistedAccount = accountRepository.find(new AccountId(registeredAccountId)).get();
+        assertEquals(registeredAccountId, persistedAccount.accountId());
+        assertEquals("a customer id", persistedAccount.customerId());
+        assertEquals("2023-04-14", persistedAccount.openingDate().toString());
     }
 
     @Test
@@ -72,7 +63,7 @@ public class RegisterUseCaseTest {
         service.registerAccount("a customer id");
 
         assertThrows(CustomerAlreadyRegisteredException.class,
-                () ->  service.registerAccount("a customer id"));
+                () -> service.registerAccount("a customer id"));
     }
 
     @Test
