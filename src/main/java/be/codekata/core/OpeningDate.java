@@ -1,6 +1,7 @@
 package be.codekata.core;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class OpeningDate {
     private final String now;
@@ -10,6 +11,6 @@ public class OpeningDate {
     }
 
     public String toString(){
-        return now;
+        return LocalDate.parse(now).format(DateTimeFormatter.ISO_DATE);
     }
 }
