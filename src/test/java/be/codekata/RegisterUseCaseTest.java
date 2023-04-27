@@ -19,12 +19,12 @@ public class RegisterUseCaseTest {
 
     private AccountService service;
     private InMemoryAccountRepository accountRepository;
-    private TestDateGenerator dateGenerator;
+    private TestCalendar dateGenerator;
 
     @BeforeEach
     void setUp() {
         accountRepository = new InMemoryAccountRepository();
-        dateGenerator = new TestDateGenerator();
+        dateGenerator = new TestCalendar();
         service = new AccountService(accountRepository, new RandomAccountIDGenerator(), dateGenerator);
     }
 
@@ -48,7 +48,7 @@ public class RegisterUseCaseTest {
 
     @Test
     public void registeredAccountIsPersisted() {
-        dateGenerator.setNow("2023-04-14");
+        dateGenerator.setToday("2023-04-14");
 
         String registeredAccountId = service.registerAccount("a customer id");
 
@@ -74,16 +74,16 @@ public class RegisterUseCaseTest {
         assertNotEquals(firstCustomerAccountId, secondCustomerAccountId);
     }
 
-    private static class TestDateGenerator extends DateGenerator {
-        private String date = "2023-04-01";
+    private static class TestCalendar extends Calendar {
+        private String today = "2023-04-01";
 
-        public void setNow(String date) {
-            this.date = date;
+        public void setToday(String date) {
+            this.today = date;
         }
 
         @Override
-        public LocalDate now() {
-            return LocalDate.parse(date);
+        public LocalDate today() {
+            return LocalDate.parse(today);
         }
     }
 }
